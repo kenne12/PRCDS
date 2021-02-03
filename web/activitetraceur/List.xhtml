@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="NotationproblemeListForm">
+
+        <p:growl id="growl" showDetail="true"/>
+
+        <br/>
+
+        <center>
+            <h2>#{langues.activite_traceur}</h2>
+        </center>
+
+        <p:contextMenu id="ExercieDataTableContextMenu" for="datalist">  
+            <p:menuitem value="#{langues.Edit}" onclick="document.getElementById('NotationproblemeListForm:editButton').click();" icon="ui-icon-pencil"/>            
+            <p:separator/>                 
+        </p:contextMenu>
+
+        <br/>
+
+        <p:panel style="background-color: blanchedalmond" id="axe" header="#{activiteTraceurController.axe.code} - #{loginController.language eq 'en' ? activiteTraceurController.axe.nomEn : activiteTraceurController.axe.nomFr}">
+
+            <p:panel id="sousaxe" header="#{activiteTraceurController.sousaxe.code} - #{ loginController.language eq 'en' ? activiteTraceurController.sousaxe.nomEn : activiteTraceurController.sousaxe.nomFr}">
+
+                <p:dataTable id="datalist"
+                             value="#{activiteTraceurController.activiteTraceurs}"
+                             var="item"
+                             rowKey="#{item.idactiviteTraceur}"
+                             paginator="true"
+                             rows="100"
+                             style="width: 100%;"
+                             rowIndexVar="index"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             selectionMode="single"
+                             draggableColumns="true"
+                             resizableColumns="true"
+                             scrollHeight="100"
+                             selection="#{activiteTraceurController.activiteTraceur1}"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                    <p:ajax event="rowSelect" update=":NotationproblemeListForm:editButton,:NotationproblemeListForm:deleteButton" listener="#{activiteTraceurController.activeButton()}" />
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('NotationproblemeListForm:viewButton').click();" listener="#{cibleController.activeButton()}"/>
+
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column  rowspan="2" colspan="2" headerText="#{langues.interventionpnds}"/>
+                            <p:column  rowspan="2" colspan="3" headerText="#{langues.nom}"/>
+                            <p:column  rowspan="2"  headerText="Detail"/>
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column style="height: 40px;word-wrap: break-word" colspan="2">
+                        <h:outputText class="hardBreak" value="#{item.idinterventionpnds.code} - #{loginController.language eq 'en' ? item.idinterventionpnds.nomEn : item.idinterventionpnds.nomFr}"/>
+                    </p:column>
+
+                    <p:column colspan="3" class="hardBreak" style="height: 40px;word-wrap: break-word ; width: 80%">
+                        <h:outputText class="hardBreak" value="#{item.nom}"/>
+                    </p:column>
+
+                    <p:column class="hardBreak" style="height: 40px;word-wrap: break-word; width: 20%">
+                        <p:commandButton actionListener="#{activiteTraceurController.updateDetail(item)}" update=":ActivitetraceurListForm:datalist" value="#{langues.voir_activites_pdsd}" oncomplete="PF('ActivitetraceurCreateDialog').show()"/>
+                    </p:column>
+
+                </p:dataTable>
+
+                <center>
+                    <p:commandButton id="createButton" update=":NotationproblemeCreateForm,growl" actionListener="#{activiteTraceurController.prepareCreate()}" icon="ui-icon-pencil" value="#{langues.Create}"  oncomplete="PF('NotationproblemeCreateDialog').show()"/>
+                    <p:commandButton id="editButton" update=":NotationproblemeCreateForm,growl" actionListener="#{activiteTraceurController.prepareEdit()}" icon="ui-icon-pencil" value="#{langues.Edit}"  oncomplete="PF('NotationproblemeCreateDialog').show()" disabled="#{activiteTraceurController.detail}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash" update="datalist,growl" actionListener="#{activiteTraceurController.delete()}" value="#{langues.Delete}" disabled="#{activiteTraceurController.detail}"> 
+                        <p:confirm header="#{langues.ConfirmationHeader}" message="#{langues.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                </center>
+
+                <h:panelGrid style="width: 70%;margin-left: 15%" columns="2">
+                    <p:commandButton value="#{langues.sous_axe_precedent}" update="axe,sousaxe,datalist" actionListener="#{activiteTraceurController.precSousAxe()}" oncomplete="javascript:location.reload();"/>
+                    <p:commandButton value="#{langues.sous_axe_suivant}" update="axe,sousaxe,datalist" style="margin-left: 50%" actionListener="#{activiteTraceurController.nextSousaxe()}" oncomplete="javascript:location.reload();"/>
+                </h:panelGrid>
+
+            </p:panel>
+
+            <h:panelGrid style="width: 80%;margin-left: 10%" columns="2">
+                <p:commandButton value="#{langues.axe_precedent}" update="axe,sousaxe,datalist" actionListener="#{activiteTraceurController.precAxe()}" oncomplete="javascript:location.reload();"/>
+                <p:commandButton style="margin-left: 60%" value="#{langues.axe_suivant}" update="axe,sousaxe,datalist" actionListener="#{activiteTraceurController.nextAxe()}" oncomplete="javascript:location.reload();"/>
+            </h:panelGrid>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+
+    </h:form>
+</ui:composition>

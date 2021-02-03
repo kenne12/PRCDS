@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog  id="ActivitetraceurCreateDlg" widgetVar="ActivitetraceurCreateDialog" modal="true" resizable="true" appendTo="@(body)" header="#{langues.activite_pdsds}">
+        <h:form id="ActivitetraceurListForm">
+
+            <p:dataTable id="datalist"
+                         value="#{activiteTraceurController.activites}"
+                         var="item"
+                         paginator="true"
+                         rows="100"
+                         style="width: 100%;"
+                         rowIndexVar="index"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         draggableColumns="true"
+                         resizableColumns="true"
+                         scrollHeight="100"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                <p:columnGroup type="header">
+                    <p:row>
+                        <p:column rowspan="2"  headerText="#{langues.district}"/>
+                        <p:column rowspan="2" colspan="2" headerText="#{langues.probleme}"/>
+                        <p:column rowspan="2" colspan="2" headerText="#{langues.objectif_opérationnel}"/>
+                        <p:column rowspan="2" colspan="2" headerText="#{langues.activite_pdsd}"/>
+                        <p:column rowspan="2" headerText="#{langues.CreateActiviteLabel_responsable}"/>
+                    </p:row>
+                </p:columnGroup>
+
+                <p:column style="word-wrap: break-word">
+                    <h:outputText class="hardBreak" value="#{loginController.language eq 'en' ? item.idprobleme.idindicateurDistrict.iddistrict.nomEn : item.idprobleme.idindicateurDistrict.iddistrict.nomFr}"/>
+                </p:column>
+
+                <p:column colspan="2">
+                    <h:outputText class="hardBreak" value="#{item.idprobleme.nom}" />
+                </p:column>
+
+                <p:column colspan="2">
+                    <h:outputText class="hardBreak" value="#{item.ididobjectifOpp.objectif}"/>
+                </p:column>
+
+                <p:column colspan="2">
+                    <h:outputText class="hardBreak" value="#{item.nom}"/>
+                </p:column>
+
+                <p:column>
+                    <h:outputText class="hardBreak" value="#{item.responsable}" />
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+    </p:dialog>
+</ui:composition>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prevalence" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4db828b3-3ba6-416e-83cc-4257b64953fd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idregion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  public.commentaire_region.numerotab,
+  public.pathologie.nom_fr AS pat,
+  public.axe.idaxe,
+  public.region.idregion,
+  public.region.nom_fr as reg,
+  public.prevalence_maladie.nombrecas,
+  public.prevalence_maladie.date as dat,
+  public.commentaire_region.commentaire,
+  public.pathologie.idpathologie,
+  public.axe.nom_fr as prgr
+FROM
+  public.pathologie
+  INNER JOIN public.prevalence_maladie ON (public.pathologie.idpathologie = public.prevalence_maladie.idpathologie)
+  INNER JOIN public.axe ON (public.prevalence_maladie.idaxe = public.axe.idaxe)
+  INNER JOIN public.region ON (public.prevalence_maladie.idregion = public.region.idregion)
+  INNER JOIN public.commentaire_region ON (public.region.idregion = public.commentaire_region.idregion)
+WHERE
+  public.commentaire_region.numerotab = 8 AND
+  public.region.idregion = $P{idregion} AND
+  public.pathologie.prevalence = TRUE
+order by public.axe.code]]>
+	</queryString>
+	<field name="numerotab" class="java.lang.Integer"/>
+	<field name="pat" class="java.lang.String"/>
+	<field name="idaxe" class="java.lang.Integer"/>
+	<field name="idregion" class="java.lang.Integer"/>
+	<field name="reg" class="java.lang.String"/>
+	<field name="nombrecas" class="java.lang.Integer"/>
+	<field name="dat" class="java.sql.Date"/>
+	<field name="commentaire" class="java.lang.String"/>
+	<field name="idpathologie" class="java.lang.Integer"/>
+	<field name="prgr" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="18" width="724" height="23" forecolor="#0000FF" uuid="22db5f5a-f275-4c1e-b427-bcade1e069c7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tableau 8: Prévalence des maladies objet d’un programme prioritaire (2006)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="681" height="20" uuid="f469b0bc-dab5-410e-8b3e-a244e88d53ef"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1.8.1.5  Maladies objet d’un programme prioritaire]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="18" y="0" width="241" height="46" backcolor="#FFFFCC" uuid="22e8ed03-1b8a-4de7-b301-0c39eeef1cc9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<text><![CDATA[Maladie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="259" y="0" width="85" height="46" backcolor="#FFFFCC" uuid="35456d92-b95c-4ee0-b946-1b09a79b140c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<text><![CDATA[Nombre de cas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="344" y="0" width="246" height="46" backcolor="#FFFFCC" uuid="286c74f6-d4c2-4a25-84cc-6bd60948cbd5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<text><![CDATA[Nom du programme de rattachement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="590" y="0" width="117" height="46" backcolor="#FFFFCC" uuid="2850732e-2250-4827-acb0-20637227f4e0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<text><![CDATA[Début mise en oeuvre ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="18" y="0" width="241" height="40" uuid="55a6a61d-a69d-4e13-b405-ef1154eacca2"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pat}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="259" y="0" width="85" height="40" uuid="0b27f758-eef7-4138-ac28-56fcc65c46e7"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombrecas}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="344" y="0" width="246" height="40" uuid="6f8b79c4-86ab-4973-8764-17bd946c271a"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prgr}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement stretchType="RelativeToBandHeight" x="590" y="0" width="117" height="40" uuid="bfa2e9fb-1ea6-414a-bfe0-aafd129c0915"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dat}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="18" y="11" width="763" height="35" uuid="604048b7-e461-4506-99ac-aa9e55a5de1b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{commentaire}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

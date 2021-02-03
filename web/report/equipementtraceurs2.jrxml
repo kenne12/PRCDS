@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="equipementtraceurs" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="3" bottomMargin="3" whenResourceMissingType="Empty" uuid="34413bb4-147a-490c-b3e9-273353323784">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="idregion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  public.typeequipementtraceur.idtypeequipementtraceur,
+  public.typeequipementtraceur.nom_fr AS typeequip,
+  public.etatequipement.idetatequipement,
+  public.etatequipement.nom_fr AS etatsequipements,
+  count(public.equipementtraceur.nombre) AS nbre,
+  public.region.nom_fr as regions,
+  public.region.idregion,
+  public.district.nom_fr as district
+FROM
+  public.equipementtraceur
+  INNER JOIN public.etatequipement ON (public.equipementtraceur.idetatequipement = public.etatequipement.idetatequipement)
+  INNER JOIN public.structure ON (public.equipementtraceur.idstructure = public.structure.idstructure)
+  INNER JOIN public.typestructure ON (public.structure.idtypestructure = public.typestructure.idtypestructure)
+  INNER JOIN public.typestruc_typeequipement ON (public.equipementtraceur.idtypestruc_typeequipement = public.typestruc_typeequipement.idtypestruc_typeequipement)
+  AND (public.typestructure.idtypestructure = public.typestruc_typeequipement.idtypestructure)
+  INNER JOIN public.typeequipementtraceur ON (public.typestruc_typeequipement.idtypeequipementtraceur = public.typeequipementtraceur.idtypeequipementtraceur)
+  INNER JOIN public.airesante ON (public.structure.idairesante = public.airesante.idairesante)
+  INNER JOIN public.district ON (public.district.iddistrict = public.airesante.iddistrict)
+  INNER JOIN public.region ON (public.district.idregion = public.region.idregion)
+WHERE
+  public.region.idregion = $P{idregion}
+GROUP BY
+  public.typeequipementtraceur.idtypeequipementtraceur,
+  public.typeequipementtraceur.nom_fr,
+  public.etatequipement.idetatequipement,
+  public.etatequipement.nom_fr,
+  public.region.nom_fr,
+  public.region.idregion,
+  public.district.nom_fr
+ORDER BY public.district.nom_fr]]>
+	</queryString>
+	<field name="idtypeequipementtraceur" class="java.lang.Integer"/>
+	<field name="typeequip" class="java.lang.String"/>
+	<field name="idetatequipement" class="java.lang.Integer"/>
+	<field name="etatsequipements" class="java.lang.String"/>
+	<field name="nbre" class="java.lang.Long"/>
+	<field name="regions" class="java.lang.String"/>
+	<field name="idregion" class="java.lang.Integer"/>
+	<field name="district" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="32" width="578" height="25" forecolor="#0000FF" uuid="9e361d28-7932-43b9-b9d4-df74135856df"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tableau 12-2: Synthèse des équipements traceurs des districts]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="677" height="30" uuid="9cd56f27-be79-4fa7-9f63-30fc6e3e16e9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1.9.2.2 Equipements traceurs par type de structure]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="140" splitType="Stretch">
+			<crosstab>
+				<reportElement x="0" y="0" width="802" height="140" uuid="7e6c35a3-91da-4dd2-bba8-c32649525874"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="55" height="126" uuid="ffae436d-ad3d-4c0d-8506-bcf9b7119a86"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement>
+								<font fontName="Times New Roman" size="16" isBold="true"/>
+							</textElement>
+							<text><![CDATA[District]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="55" y="0" width="63" height="126" uuid="7174fbd8-6ca8-46a9-9557-26c0aee2bfae"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement>
+								<font fontName="Times New Roman" size="16" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Etat]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="district" width="55" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{district}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="55" height="59" uuid="1ebba02f-83a4-4265-8c00-f450e4c7fa3f"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{district}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#005FB3" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="118" height="25" forecolor="#000000" backcolor="#FFFFCC" uuid="a2bcbc57-b167-4655-bd50-41a15b0adb8a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total Final]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="etatsequipements" width="63" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{etatsequipements}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="63" height="34" uuid="b5919242-4303-4dac-a2dd-e4db0ff8e72e"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{etatsequipements}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="63" height="25" backcolor="#FFFFCC" uuid="fb033004-eb2a-43cc-9f4b-ea753fc7eac6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total etatsequipements]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="typeequip" height="126" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{typeequip}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="37" height="126" backcolor="#FFFFCC" uuid="69b6abfe-b943-47bd-8a88-fa15ca158eb9"/>
+								<textElement verticalAlignment="Middle" rotation="Left">
+									<font fontName="Times New Roman" isBold="true" isItalic="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{typeequip}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="44" height="126" backcolor="#FFFFCC" uuid="5b9bd6fe-8491-418e-a17f-dbc2e3b67c5b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total ]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="nbreMeasure" class="java.lang.Long" calculation="Sum">
+					<measureExpression><![CDATA[$F{nbre}]]></measureExpression>
+				</measure>
+				<crosstabCell width="37" height="34">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="37" height="34" uuid="6c7087fd-746f-4cd8-8e78-2e77bc97901f"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{nbreMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="37" height="25" rowTotalGroup="district">
+					<cellContents backcolor="#005FB3" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="37" height="25" forecolor="#000000" backcolor="#FFFFCC" uuid="d8fbf163-0de0-4355-9d7a-394396561b0e"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{nbreMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="44" height="34" columnTotalGroup="typeequip">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="44" height="34" backcolor="#FFFFCC" uuid="5b44613a-7652-4722-8294-de143631a54c"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{nbreMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="44" rowTotalGroup="district" columnTotalGroup="typeequip">
+					<cellContents backcolor="#005FB3" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="44" height="25" forecolor="#000000" backcolor="#FFFFCC" uuid="3c5b3819-67a0-4faf-a1bc-d19d68bade10"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{nbreMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="37" height="25" rowTotalGroup="etatsequipements">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="37" height="25" backcolor="#FFFFCC" uuid="a7c1ed58-2b92-4052-aac7-f0217a1edf82"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{nbreMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="44" rowTotalGroup="etatsequipements" columnTotalGroup="typeequip">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="44" height="25" backcolor="#FFFFCC" uuid="0706a436-43e9-4a6b-8662-649a0a55cfe0"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{nbreMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

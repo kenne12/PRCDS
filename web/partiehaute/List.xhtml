@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:messages id="growl" closable="true" />
+
+    <h:form id="PartiehauteListform">
+
+        <p:panel header="#{langues.partiehaute}">
+
+            <p:tabView>
+                <p:tab title="#{langues.introduction}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px" rows="27"  id="intro" value="#{partiehauteController.partiehauteRegion.introduction}" />
+                    </h:panelGrid>
+                </p:tab>
+                
+                <p:tab title="#{langues.presentation}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px; text-justify : auto; font-family:arial, sans-serif; font-size:90%"  rows="27" id="prese" value="#{partiehauteController.partiehauteRegion.presentationgenerale}"/>
+                    </h:panelGrid>
+                </p:tab>
+                
+                <p:tab title="#{langues.situation_geo}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px; text-justify : auto; font-family:arial, sans-serif; font-size:90%"  rows="27" id="pres" value="#{partiehauteController.partiehauteRegion.situationgeographique}"/>
+                    </h:panelGrid>
+                </p:tab>
+                
+                <p:tab title="#{langues.situation_eco}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px; text-justify : auto; font-family:arial, sans-serif; font-size:90%"  rows="27" id="prse" value="#{partiehauteController.partiehauteRegion.situationeconomique}"/>
+                    </h:panelGrid>
+                </p:tab>
+                
+                <p:tab title="#{langues.situation_socio}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px" rows="27" id="sitsocieco" value="#{partiehauteController.partiehauteRegion.donneeSocioCult}"/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="#{langues.donneeadmin}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px; text-justify : auto; font-family:arial, sans-serif; font-size:90%"  rows="27" id="pese" value="#{partiehauteController.partiehauteRegion.donneeAdmin}"/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="#{langues.donneedemographique}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px; text-justify : auto; font-family:arial, sans-serif; font-size:90%"  rows="27" id="rese" value="#{partiehauteController.partiehauteRegion.donneeDemographique}"/>
+                    </h:panelGrid>
+                </p:tab>
+
+                <p:tab title="#{langues.chargement_carte}">
+                    <h:panelGrid  columns="1" style="font-weight: bold; font-style: oblique; width: 100%"> 
+                        <p:fileUpload id="photo" fileUploadListener="#{partiehauteController.handleFileUpload}"  
+                                      label="#{langues.insert_carte}"
+                                      uploadLabel="#{langues.telecharger}"
+                                      cancelLabel="#{langues.Cancel}"
+                                      mode="advanced"   
+                                      update="affi_photo"  
+                                      sizeLimit="1000000000"   
+                                      allowTypes="/(\.|\/)(gif|jpg|jpeg|png)$/"
+                                      auto="false"
+                                      style="text-align:left; font-weight: bold; font-style: oblique;"
+                                      />
+                    </h:panelGrid>                      
+
+                    <p:graphicImage id="affi_photo" value="/report/images/#{partiehauteController.carte}" 
+                                    height="270" width="400"
+                                    style="border-radius: 10px 10px 10px 10px; border: 5px;font-weight: bold; font-style: oblique;"
+                                    />
+                </p:tab>
+
+            </p:tabView>
+        </p:panel>
+        <center>
+
+            <p:commandButton actionListener="#{partiehauteController.savePartiehauteRegion()}" value="#{langues.Save}" update=":PartiehauteListform" > 
+                <p:confirm header="#{langues.ConfirmationHeader}" message="#{langues.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </center>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+</ui:composition>

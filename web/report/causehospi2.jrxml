@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="causehospi" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="3" bottomMargin="3" uuid="1d799549-9b23-4c43-a372-bd302ac66e25">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="idregion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  public.hospitalisation.idhospitalisation,
+  public.hospitalisation.nom_fr AS causes,
+  public.rubriquehospitalisation.idrubriquehospitalisation,
+  public.rubriquehospitalisation.nom_fr AS rubriques,
+  public.commentaire_region.commentaire,
+  public.hospitalisation_region.idhospitalisation_region,
+  public.hospitalisation_region.valeur,
+  public.structure.nom_fr as structures
+FROM
+  public.region
+  INNER JOIN public.commentaire_region ON (public.region.idregion = public.commentaire_region.idregion)
+  INNER JOIN public.structure ON (public.region.idregion = public.structure.idregion)
+  INNER JOIN public.hospitalisation_region ON (public.hospitalisation_region.idstructure = public.structure.idstructure)
+  INNER JOIN public.rubriquehospitalisation ON (public.rubriquehospitalisation.idrubriquehospitalisation = public.hospitalisation_region.idrubriquehospitalisation)
+  INNER JOIN public.hospitalisation ON (public.hospitalisation.idhospitalisation = public.hospitalisation_region.idhospitalisation)
+WHERE
+  public.region.idregion = $P{idregion} AND
+  public.commentaire_region.numerotab = 5 AND
+  public.hospitalisation_region.consolide = false AND
+  public.structure.consolide = false AND
+  public.structure.idniveaupyramide = 2
+ORDER BY
+  public.rubriquehospitalisation.nom_fr,
+  public.hospitalisation.nom_fr,
+  public.hospitalisation.idhospitalisation,
+  public.rubriquehospitalisation.idrubriquehospitalisation]]>
+	</queryString>
+	<field name="idhospitalisation" class="java.lang.Integer"/>
+	<field name="causes" class="java.lang.String"/>
+	<field name="idrubriquehospitalisation" class="java.lang.Integer"/>
+	<field name="rubriques" class="java.lang.String"/>
+	<field name="commentaire" class="java.lang.String"/>
+	<field name="idhospitalisation_region" class="java.lang.Long"/>
+	<field name="valeur" class="java.lang.Double"/>
+	<field name="structures" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="22" width="578" height="20" forecolor="#0000FF" uuid="0c578d1b-9d81-47f4-988c-dc47988f4b36"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tableau 6-1:   Principales causes d’hospitalisation dans les structures du niveau regional]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="-1" width="681" height="23" uuid="d3ac7edc-5ca8-446b-9dd7-c3833f4745cf"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1.8.1.2 Principales causes d’hospitalisation]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="151" splitType="Stretch">
+			<crosstab>
+				<reportElement x="0" y="0" width="753" height="112" uuid="d3eba376-f604-40c8-a81d-fd1a82d49312"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="167" y="0" width="150" height="75" backcolor="#FFFFCC" uuid="1b035530-3fa9-4a9e-ad6d-b04449a462a5"/>
+							<box topPadding="2" leftPadding="2" rightPadding="3">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="14" isBold="true" isItalic="false"/>
+							</textElement>
+							<text><![CDATA[Cause d'hospitalisation]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="167" height="75" backcolor="#FFFFCC" uuid="54ea2440-6b31-4d5d-94c5-92a22a3fad4f"/>
+							<box topPadding="2" leftPadding="2" rightPadding="3">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="14" isBold="true" isItalic="false"/>
+							</textElement>
+							<text><![CDATA[Structures]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="group1" width="167">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{structures}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="0" y="0" width="167" height="50" uuid="2eee349d-c87b-41bd-b439-59917cf01ef5"/>
+								<box leftPadding="2">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{group1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="causes" width="150" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{causes}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="25" uuid="34f624a6-24e6-4782-990c-528388cd73f6"/>
+								<box leftPadding="3"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12" isItalic="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{causes}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="150" height="25" backcolor="#FFFFCC" uuid="15310928-b5a5-4ad1-bafa-f490859e6918"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="rubriques" height="75" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{rubriques}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="56" height="75" backcolor="#FFFFCC" uuid="dfe724e8-63d1-4232-a6b1-86b8df56d856"/>
+								<box topPadding="2" leftPadding="3" bottomPadding="3" rightPadding="2"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left">
+									<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{rubriques}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="53" height="75" backcolor="#FFFFCC" uuid="9ce0e67d-1b97-4773-89b2-1297e44a45f3"/>
+								<box leftPadding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12" isBold="true" isItalic="false"/>
+								</textElement>
+								<text><![CDATA[Total des cas]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="valeurMeasure" class="java.math.BigDecimal" calculation="Sum">
+					<measureExpression><![CDATA[$F{valeur}]]></measureExpression>
+				</measure>
+				<crosstabCell width="56" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="56" height="25" uuid="321368cb-93b4-4aa2-9e90-0b5a314276a0"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12" isItalic="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{valeurMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="56" height="25" rowTotalGroup="causes">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="1" y="0" width="55" height="25" backcolor="#FFFFCC" uuid="8c942581-55eb-42b5-ac04-e6b9d6427133"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{valeurMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="53" height="25" columnTotalGroup="rubriques">
+					<cellContents backcolor="#FFFFCC" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="53" height="25" backcolor="#FFFFCC" uuid="346fe7a0-5f7c-4cd3-b2f9-b0b687cd1655"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{valeurMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="53" height="25" rowTotalGroup="causes" columnTotalGroup="rubriques">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="53" height="25" backcolor="#FFFFCC" uuid="d6e75749-e3fd-4504-811a-553026f5f401"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{valeurMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group1">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group1" columnTotalGroup="rubriques">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="112" width="777" height="39" uuid="73a746f8-b362-475d-86cb-c18b6d895eab"/>
+				<box topPadding="5" leftPadding="4" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{commentaire}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

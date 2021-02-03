@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+        <p:dialog  id="NotationproblemeCreateDlg" widgetVar="NotationproblemeCreateDialog" modal="true" resizable="true" appendTo="@(body)" header="#{langues.activite_traceur}">
+            <h:form id="NotationproblemeCreateForm">
+                <br/>
+
+                <h:panelGroup id="display">
+
+                    <div style=" border: solid 0.5px ; width: 1200px ; height: 550px; overflow: auto;">
+
+                        <center>
+
+                            <br/>
+
+                            <p:panelGrid columns="2">
+
+                                <p:outputLabel value="#{langues.Axe}"/>
+                                <p:outputLabel value="#{activiteTraceurController.axe.code} - #{loginController.language eq 'en' ? activiteTraceurController.axe.nomEn : activiteTraceurController.axe.nomFr}"/>
+
+                                <p:outputLabel value="#{langues.sousaxe}"/>
+                                <p:outputLabel value="#{activiteTraceurController.sousaxe.code} - #{loginController.language eq 'en' ? activiteTraceurController.sousaxe.nomEn : activiteTraceurController.sousaxe.nomFr}"/>
+
+                                <p:outputLabel  value="#{langues.interventionpnds}" id="intervention_label" for="intervention"/>
+                                <p:selectOneMenu disabled="#{activiteTraceurController.showSelectIntervention}" filter="true" id="intervention" autoWidth="false" style="width: 600px" value="#{activiteTraceurController.interventionpnds.idinterventionpnds}">
+                                    <f:selectItem itemLabel="#{langues.choisir}"/>
+                                    <f:selectItems value="#{activiteTraceurController.interventionpndses}" var="i" itemLabel="#{i.code} - #{loginController.language eq 'en' ? i.nomEn : i.nomFr}" itemValue="#{i.idinterventionpnds}"/>
+                                    <p:ajax update="pickList,activite_default" listener="#{activiteTraceurController.updateOther1()}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel rendered="#{activiteTraceurController.showSelector}" value="#{langues.select_default_act}"/>
+                                <p:selectBooleanCheckbox rendered="#{activiteTraceurController.showSelector}" value="#{activiteTraceurController.showSelectActivite}">
+                                    <p:ajax update="activite_default,activite_defaut_label,display" listener="#{activiteTraceurController.updateSelect()}"/>
+                                </p:selectBooleanCheckbox>
+
+                                <p:outputLabel rendered="#{activiteTraceurController.showSelectActivite}" value="#{langues.activite_traceur_}" id="activite_defaut_label" for="activite_default"/>
+                                <p:selectOneMenu rendered="#{activiteTraceurController.showSelectActivite}" filter="true" id="activite_default" autoWidth="false" style="width: 600px"  value="#{activiteTraceurController.activiteTraceur.idactiviteTraceur}">
+                                    <f:selectItem itemLabel="#{langues.choisir}"/>
+                                    <f:selectItems value="#{activiteTraceurController.activiteTraceurs}" var="a" itemLabel="#{loginController.language eq 'en' ? a.nom : a.nom}" itemValue="#{a.idactiviteTraceur}"/>
+                                    <p:ajax update="pickList" listener="#{activiteTraceurController.updateOther1()}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel rendered="#{activiteTraceurController.showSaisiActivite}" for="activite_traceur" value="#{langues.activite_traceur_}"/>
+                                <p:inputTextarea rendered="#{activiteTraceurController.showSaisiActivite}" id="activite_traceur" required="true" requiredMessage="#{langues.activite_traceur_} : #{langues.requis}" cols="120" rows="4" value="#{activiteTraceurController.activiteTraceur.nom}"/>
+
+                            </p:panelGrid>
+
+                            <br/>
+
+                            <p:pickList id="pickList"  style="text-align: left" value="#{activiteTraceurController.dualList}" var="activite" effect="bounce"
+                                        itemValue="#{activite}" itemLabel="#{activite.nom} - #{activite.idprobleme.idindicateurDistrict.iddistrict.nomFr}" showSourceControls="true" showTargetControls="true" showCheckbox="false"
+                                        showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="activitepdsdConverter" required="true" requiredMessage="#{langues.region} : #{langues.requis}">
+
+                                <f:facet name="sourceCaption">#{langues.DISPONIBLES}</f:facet>
+                                <f:facet name="targetCaption">#{langues.SELECTIONNEES}</f:facet>                            
+                            </p:pickList>
+
+                        </center>
+
+                    </div>
+
+                    <p:commandButton actionListener="#{activiteTraceurController.create()}" style="float: right;" icon="ui-icon-check" value="#{langues.Valider}" update="display,:NotationproblemeListForm:datalist,:NotationproblemeListForm:growl" oncomplete="PF('NotationproblemeCreateDialog').hide()"/>
+                    <p:commandButton style="float: right; color: red;" icon="ui-icon-close" value="#{langues.Cancel}" onclick="PF('NotationproblemeCreateDialog').hide()"/>
+
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="couverture1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="ecacded1-79a9-43fc-b09d-2b4181319d86">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="469"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Batrapi\\Developpement\\Projet JEE\\pdsd\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idregion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  public.periode.idperiode,
+  public.periode.nom,
+  public.region.idregion,
+  public.region.nom_fr as districts
+FROM
+  public.periode,
+  public.region
+WHERE
+  public.periode.idperiode = 18 AND
+  public.region.idregion = $P{idregion}]]>
+	</queryString>
+	<field name="idperiode" class="java.lang.Integer"/>
+	<field name="nom" class="java.lang.String"/>
+	<field name="idregion" class="java.lang.Integer"/>
+	<field name="districts" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="541" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-2" x="9" y="5" width="5" height="531" forecolor="#99FF99" backcolor="#99FF99" uuid="f4fdccdf-2119-4967-b800-180b4398f165"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-3" x="792" y="1" width="5" height="535" forecolor="#99FF99" backcolor="#99FF99" uuid="ffd51512-fa02-4b38-8fd2-8493c4ec3d55"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-1" x="9" y="1" width="783" height="5" forecolor="#99FF99" backcolor="#99FF99" uuid="63c0239e-7da5-48a8-b5fe-3c9e11c9baef"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-5" x="26" y="11" width="758" height="5" forecolor="#FF6666" backcolor="#FF6666" uuid="a9e6d5b1-0bc6-433e-bade-362909c0571f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-11" x="32" y="505" width="741" height="5" forecolor="#FFFF33" backcolor="#FFFF33" uuid="0f7ba642-ca47-4f01-86f4-0590bd933da2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-8" x="20" y="11" width="5" height="506" forecolor="#FF6666" backcolor="#FF6666" uuid="acf52f53-6182-4a5b-9d26-f1242cfbb124"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-9" x="37" y="22" width="736" height="5" forecolor="#FFFF33" backcolor="#FFFF33" uuid="44b34eec-f1db-4db7-9416-13792ce56f7b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-4" x="9" y="531" width="783" height="5" forecolor="#99FF99" backcolor="#99FF99" uuid="d9cf8ea4-15d6-4098-b51f-32d59eb241a7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-7" x="779" y="11" width="5" height="510" forecolor="#FF6666" backcolor="#FF6666" uuid="4f243ffb-494c-4893-af15-81bff3021baa"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-10" x="32" y="22" width="5" height="484" forecolor="#FFFF33" backcolor="#FFFF33" uuid="d7c5c96e-b438-4336-9583-87b4876c9820"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-12" x="768" y="22" width="5" height="483" forecolor="#FFFF33" backcolor="#FFFF33" uuid="c5e70481-fd8f-465f-8ab0-339dd6a8b2d6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-6" x="20" y="516" width="763" height="5" forecolor="#FF6666" backcolor="#FF6666" uuid="c5115fce-713d-414d-ae8c-3a69323b103d"/>
+				<graphicElement>
+					<pen lineColor="#FF0033"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="55" y="41" width="240" height="20" uuid="1d8ec517-bb3a-4316-b86b-86d2f4ebe5ca"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[République du Cameroun]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="61" width="249" height="20" uuid="d68669c3-e533-4ee2-9cf7-8abd2d73bc55"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paix - Travail – Patrie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="81" width="249" height="20" uuid="59f75b69-cb3d-400b-a4d4-d20b67c92144"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Ministère de la Santé Publique]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="101" width="249" height="20" uuid="ce06b94a-841b-40af-9f84-cf1f1e2c3096"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Délégation Régionale de la Santé Publique]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="528" y="82" width="229" height="20" uuid="19f3a72c-f6b4-4448-85ad-aa8340e4fc6a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Ministry of Public Health]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="528" y="62" width="229" height="20" uuid="c1b3a4d8-fbb4-4b67-bc86-41c660168320"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peace - Work - Fatherland]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="528" y="41" width="229" height="20" uuid="80e293cd-d283-4180-ab25-907652ee0644"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Republic of Cameroon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="528" y="102" width="229" height="20" uuid="fe640a03-c465-4def-a2b2-968bb1314274"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Regional Delegation of Public Health]]></text>
+			</staticText>
+			<image>
+				<reportElement x="349" y="27" width="166" height="188" uuid="bb7ecf47-63b6-4441-ad4a-2383d4c7ace1"/>
+				<imageExpression><![CDATA["logominsante1.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="156" y="150" width="660" height="225" uuid="ded08a72-ded8-45fa-882a-2f68285f5790"/>
+				<imageExpression><![CDATA["pdsd2.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="156" y="440" width="471" height="55" forecolor="#006600" uuid="7571d304-8b68-4b6f-ba25-27ad86d6190a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="46" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="360" width="471" height="72" forecolor="#006600" uuid="5c50c887-1090-4c3c-8ac8-1efcc00ea618"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="60" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{districts}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="14" splitType="Immediate">
+			<textField>
+				<reportElement x="362" y="0" width="80" height="14" uuid="d1320bad-8e84-44d7-aa02-991321306592"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="442" y="0" width="40" height="14" uuid="381087e0-8a54-4288-8ed4-b2a5dfd6ccff"/>
+				<textElement>
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="555" splitType="Stretch">
+			<subreport runToBottom="true">
+				<reportElement positionType="Float" x="4" y="0" width="783" height="11" uuid="20554ff7-e0c7-41b2-ac03-7b8526538466"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["listedestableaux.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true">
+				<reportElement positionType="Float" x="4" y="12" width="783" height="9" uuid="b0562a2e-4da1-4cb3-9b5b-d892cc9209cc"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["partiehaute.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="false">
+				<reportElement positionType="Float" x="4" y="22" width="783" height="9" uuid="e48cce64-c656-4010-8f40-8fadd02fdc68"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["partiehautecarte.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true">
+				<reportElement positionType="Float" x="-2" y="31" width="783" height="7" uuid="9a4501df-3e1e-4126-a592-a392c46797ce"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["partiehautedonnedemographique.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true">
+				<reportElement positionType="Float" x="15" y="62" width="758" height="7" uuid="76e9e01d-bc70-4858-93db-4c5c51d62c14"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["partiehautedonneadminietpoiltique.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="false">
+				<reportElement positionType="Float" x="7" y="79" width="783" height="8" uuid="6efe9958-0b62-4ee1-bd81-1b7b5187cb15"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["progressionpopulation.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="3" y="97" width="783" height="8" uuid="229fb024-80c6-490a-9f18-9b5c2f3e4dc0"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["partiehautedonnesociauxeconomique.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true">
+				<reportElement positionType="Float" x="4" y="108" width="783" height="9" uuid="66c5d9c8-ccf3-4f21-818d-488407c1fd4f"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["partiehautedonnesociauxculturelle.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="5" y="121" width="783" height="6" uuid="a049c639-6615-4599-b546-603f8ed97de0"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["acteurssysteme.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="-1" y="129" width="783" height="10" uuid="a1221efa-ab63-40f4-a16a-b6ebc165bbad"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["facteurssystemes.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="154" width="783" height="8" uuid="4ab34677-cc39-46e9-a217-9490b0f8a0bf"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["morbidite.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="7" y="176" width="777" height="7" uuid="93e7b5ed-e3a3-483b-867d-62336318477b"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["causehospi.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="9" y="186" width="779" height="10" uuid="a82885c7-12c4-4dc4-aa47-a6d395cb5973"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["mape.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="8" y="209" width="783" height="8" uuid="94ca966b-3d34-4552-b718-2e5cfe420f9e"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["causemortalite.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="13" y="227" width="783" height="7" uuid="34525b01-e25d-41a8-ad0d-fa49de80a683"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["syntheserh.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="12" y="276" width="776" height="6" uuid="938f742e-71cb-4284-af5f-58ff648c3cb8"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["syntheseinfraequip.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="13" y="285" width="783" height="5" uuid="12a30ebd-f968-48af-94cf-4b2a6303e53b"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["equipementtraceurs.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="13" y="310" width="783" height="7" uuid="2fc4d708-cc34-4ba3-90c5-98daeb058da3"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["recette.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="13" y="321" width="783" height="7" uuid="77819104-31b0-4a23-8595-b3d4f173dbc6"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["depense.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="10" y="338" width="783" height="7" uuid="adfc0938-acc6-4812-9950-dcf3a1380787"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["medicamenttraceurs.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="9" y="410" width="778" height="9" uuid="e3ec2ae0-4e72-4b38-bb85-4aa72c028909"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["etatperformances.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="14" y="347" width="778" height="10" uuid="d8c3ce91-f8f4-451c-8ef4-238bd6e26186"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$F{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["ffomrh.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="358" width="777" height="11" uuid="ef66e8b0-a070-4563-bb58-e0526a1af421"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$F{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["ffomie.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="370" width="777" height="7" uuid="6eb1766a-5eaa-4d31-b6ea-1b454d9d6a3e"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$F{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["ffomrf.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="14" y="378" width="778" height="9" uuid="6ae81d1a-df80-4b9c-a8f2-347a13570015"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$F{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["ffomm.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="390" width="777" height="8" uuid="f25968b5-a42d-44eb-89ee-83dd30542d3e"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$F{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["ffomisr.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="14" y="398" width="773" height="11" uuid="6a644b85-6662-4d35-ae1e-591e4662a56a"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["ffomg.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="5" y="440" width="783" height="10" uuid="c86b3902-4ef3-4f23-847e-89ff1779101e"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["activitescorrectrice2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="9" y="450" width="778" height="13" uuid="14719e1f-b4dd-45ff-9d49-e4fd1b16dbca"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["activitesconslidation.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="8" y="522" width="774" height="14" uuid="c52d914a-8759-4474-8df9-fb5ee3433c48"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["activitecorrectrices.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="12" y="501" width="770" height="9" uuid="33ddb23c-1d84-4769-a9ed-44f86c81023b"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["projectionrecette.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="5" y="485" width="778" height="11" uuid="aaec71c1-e67a-4f78-b6f0-c10b8237d117"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["besoininvestissementequiptypstruc.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="10" y="474" width="770" height="8" uuid="1cb84496-00ba-47d1-9708-8b2ce7d2fff0"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["besoinsenivestissementtypestruct.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="13" y="510" width="772" height="12" uuid="913d8ead-db31-4ec1-8bad-a8f6db03bcc7"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["budgetenparinstitutionok.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="9" y="463" width="777" height="11" uuid="02aea96d-9089-4312-aae9-c9975ffafd9b"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["budgetenmasse.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="9" y="199" width="770" height="9" uuid="88940d3c-8971-4166-ad5c-cd9acf264560"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["mape2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="9" y="218" width="774" height="8" uuid="43df3b2c-cd6a-41b4-b1ba-f831a8e2c9c2"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["causemortalite 2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="3" y="141" width="776" height="11" uuid="30113428-41da-43d6-8031-3c7f9a8845be"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["morbidite2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="8" y="165" width="773" height="8" uuid="d38e2985-5052-42a9-97cf-7d919bb5acf6"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["causehospi2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="9" y="87" width="778" height="10" uuid="f39da53b-3c26-4fdd-b6eb-c119e67f6db0"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["couverturesanitaireok.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="19" y="268" width="778" height="8" uuid="5083e044-98c0-4091-862d-8642a9691733"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["equipementtraceurs2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="18" y="261" width="774" height="6" uuid="41b46c4c-aabb-48d2-8777-45a79862ba4c"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["syntheseinfraequip2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="328" width="773" height="8" uuid="5fd8a506-1e91-425a-be6a-9eae0f5b9236"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["medicamenttraceurs2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="19" y="249" width="769" height="11" uuid="3bbb34d9-cab9-4c31-b6dc-db94ab98948d"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["synthesedesacteurscommunautaires.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="19" y="236" width="771" height="11" uuid="65791098-ae96-4864-b9c9-3961902102e0"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["synthesedesacteurscommunautaires2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="421" width="764" height="12" uuid="41754e10-c3da-4251-8c47-eb425f2f2e09"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["priorisationpb.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="20" y="291" width="772" height="8" uuid="f3327ee7-457f-42a2-bfa6-af57fbd3a986"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["gouvernance.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="18" y="302" width="773" height="6" uuid="b83c3154-836a-4ebf-a728-29fb5bcd6d78"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["infosanitaire.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="14" y="39" width="765" height="10" uuid="0989a1ab-3e5a-4044-b848-7c1580a1b246"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["educationetgenre.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="13" y="50" width="772" height="11" uuid="b8bdf459-43d0-4469-9368-1c7ffdb12bbb"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$P{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["statutetrole.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="14" y="69" width="769" height="7" uuid="c5c92a4e-ae2b-4ce8-a9b7-ddb26a50587e"/>
+				<subreportParameter name="idregion">
+					<subreportParameterExpression><![CDATA[$F{idregion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["partiehautesituationsocioculturelle.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="partiehaute" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="22b18984-92f8-4047-825e-03c1daa22832">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idregion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  public.partiehaute_region.idregion,
+  public.partiehaute_region.introduction,
+  public.partiehaute_region.presentationgenerale,
+  public.partiehaute_region.situationgeographique,
+  public.partiehaute_region.situationeconomique,
+  public.partiehaute_region.carte,
+  public.partiehaute_region.donnee_admin,
+  public.partiehaute_region.donnee_socio_cult,
+  public.partiehaute_region.donnee_demographique,
+  public.region.idregion,region.nom_fr
+FROM
+  public.region
+  INNER JOIN public.partiehaute_region ON (public.region.idregion = public.partiehaute_region.idregion)
+WHERE
+  public.region.idregion = $P{idregion} ]]>
+	</queryString>
+	<field name="idregion" class="java.lang.Integer"/>
+	<field name="introduction" class="java.lang.String"/>
+	<field name="presentationgenerale" class="java.lang.String"/>
+	<field name="situationgeographique" class="java.lang.String"/>
+	<field name="situationeconomique" class="java.lang.String"/>
+	<field name="carte" class="java.lang.String"/>
+	<field name="donnee_admin" class="java.lang.String"/>
+	<field name="donnee_socio_cult" class="java.lang.String"/>
+	<field name="donnee_demographique" class="java.lang.String"/>
+	<field name="nom_fr" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="23" y="0" width="705" height="22" uuid="85ddbe69-80c1-4dc9-8f17-21390713a011"/>
+				<textElement>
+					<font fontName="Times New Roman" size="18" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CHAPITRE I : ANALYSE DE SITUATION]]></text>
+			</staticText>
+			<line>
+				<reportElement x="23" y="22" width="689" height="1" uuid="2462b777-8bbe-494e-96d6-15d135ae2bef"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="459" splitType="Stretch">
+			<staticText>
+				<reportElement x="47" y="22" width="740" height="22" uuid="b3839ac9-2781-4ae1-a6e3-ef4dd4512ca1"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[I.1- CARTOGRAPHIE SANITAIRE DE LA REGION]]></text>
+			</staticText>
+			<image>
+				<reportElement x="32" y="81" width="1591" height="378" uuid="bad4095b-ba4b-4201-88d8-7d37e29ebaca"/>
+				<imageExpression><![CDATA["images/"+$F{carte}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="32" y="0" width="705" height="22" uuid="8fe7bd1f-6ce9-419d-8ec0-432ffa4fa551"/>
+				<textElement>
+					<font fontName="Times New Roman" size="18" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[I - ETAT DES LIEUX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="59" y="46" width="200" height="22" uuid="cbdd3f07-1716-414d-98c3-e466ad0e4db2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Figure 1 : Carte de la région:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="259" y="46" width="494" height="20" uuid="2c0162de-7e1d-4e81-8b66-986acbc73e06"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom_fr}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

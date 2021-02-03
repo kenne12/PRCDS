@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="couverturesanitaireok" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="aa3873f0-6c64-4edb-bd84-c1f89c4c6733">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="idregion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  sum(public.populationfosa.populationcouverte) AS popfosa,
+  public.structure.nom_fr as structures,
+  public.commentaire_region.commentaire,
+  public.annee.nom as annees
+FROM
+  public.populationfosa
+  INNER JOIN public.annee ON (public.populationfosa.idannee = public.annee.idannee)
+  INNER JOIN public.structure ON (public.populationfosa.idstructure = public.structure.idstructure)
+  INNER JOIN public.region ON (public.structure.idregion = public.region.idregion)
+  INNER JOIN public.commentaire_region ON (public.region.idregion = public.commentaire_region.idregion)
+WHERE
+  public.commentaire_region.numerotab = 1 AND
+  public.annee.popfosa = true AND
+  public.structure.consolide = true AND
+  public.region.idregion = $P{idregion}
+GROUP BY
+  public.structure.nom_fr,
+  public.commentaire_region.commentaire,
+  public.annee.nom order by public.annee.nom,public.structure.nom_fr]]>
+	</queryString>
+	<field name="popfosa" class="java.lang.Double"/>
+	<field name="structures" class="java.lang.String"/>
+	<field name="commentaire" class="java.lang.String"/>
+	<field name="annees" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="578" height="20" forecolor="#0000FF" uuid="dc9a0d9b-e33d-4829-9abe-d72e4189ff94"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tableau 2: Progression de la population par district]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="200" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="152" width="757" height="46" uuid="ca16f353-6dfe-453d-a452-7b7e63a058dc"/>
+				<box topPadding="6" leftPadding="3" bottomPadding="2" rightPadding="5">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{commentaire}]]></textFieldExpression>
+			</textField>
+			<crosstab>
+				<reportElement mode="Transparent" x="0" y="0" width="802" height="150" uuid="fb571496-aa23-4477-8349-e0b41354df34"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="222" height="40" backcolor="#FFFFCC" uuid="c7d0b27f-5702-46b2-ba1b-9bf5f69e05ee"/>
+							<box leftPadding="8">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[STRUCTURES]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="structures" width="222" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{structures}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="222" height="29" isPrintWhenDetailOverflows="true" uuid="04618dc9-a91f-4297-bfc7-95d191cc87ff"/>
+								<box leftPadding="3"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{structures}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="222" height="30" isPrintWhenDetailOverflows="true" backcolor="#FFFFCC" uuid="c9a000ed-3ed5-43fa-acfc-95faaa022cd2"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total ]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="annees" height="40" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{annees}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="77" height="40" isPrintWhenDetailOverflows="true" backcolor="#FFFFCC" uuid="de2a3f72-9bf1-4ab8-a1f9-02ea98501fc1"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{annees}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="67" height="40" isPrintWhenDetailOverflows="true" backcolor="#FFFFCC" uuid="c189c0ae-b3e2-4f1e-afec-f278dd3d2d90"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total ]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="popfosaMeasure" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[$F{popfosa}]]></measureExpression>
+				</measure>
+				<crosstabCell width="77" height="29">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" x="0" y="0" width="77" height="29" isPrintWhenDetailOverflows="true" uuid="d303bb7f-5b50-4b1c-a115-4ee41cf98a7d"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{popfosaMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="77" height="30" rowTotalGroup="structures">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="77" height="30" isPrintWhenDetailOverflows="true" backcolor="#FFFFCC" uuid="32aaca93-f7af-4a63-8219-a037ec47e25b"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{popfosaMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="67" height="29" columnTotalGroup="annees">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="67" height="29" isPrintWhenDetailOverflows="true" uuid="2d8878e7-0396-450f-8178-449208d90ced"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{popfosaMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="67" height="30" rowTotalGroup="structures" columnTotalGroup="annees">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="67" height="30" isPrintWhenDetailOverflows="true" backcolor="#FFFFCC" uuid="af25b554-ce6e-4df9-ba38-33005b941e9c"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{popfosaMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

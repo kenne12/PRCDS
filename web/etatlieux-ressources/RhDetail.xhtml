@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+        <p:dialog  id="MedicamentDetailDlg" footer="Visualiser le détail" widgetVar="MedicamentDetailDialog"
+                   modal="true" resizable="true" appendTo="@(body)" 
+                   height="600"
+                   width="1250"
+                   header="Visualiser le détail">
+            <h:form id="MedicamentDetailForm">
+
+                <p:dataTable id="datalist"
+                             value="#{rhsController.structures1}"
+                             var="item"
+                             rowKey="#{item.idstructure}"
+                             paginator="true"
+                             rows="80"
+                             style="width: 100%; overflow: auto"
+                             rowIndexVar="index"
+                             rowsPerPageTemplate="10,20,30,40,50,60,70,80"
+                             draggableColumns="true"
+                             resizableColumns="true"
+                             scrollHeight="100"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column class="hardBreak" rowspan="2" colspan="2" headerText="#{langues.nom}" />
+                            <p:column class="hardBreak" colspan="#{rhsController.profilpersonnels.size()}" headerText="#{langues.profilpersonnel}" />
+                        </p:row>
+                        <p:row>
+                            <ui:repeat value="#{rhsController.profilpersonnels}" var="profil">
+                                <p:column class="hardBreak"  headerText="#{loginController.language eq 'en' ? profil.nomEn : profil.nomFr}" />
+                            </ui:repeat>
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column colspan="2" style= "height: 30px" >
+                        <h:outputText class="hardBreak" value="#{item.nomFr}" />
+                    </p:column>
+
+                    <p:columns value="#{rhsController.profilpersonnels}" var="var">
+                        <h:outputText value="#{rhsController.findByStructure(item,var).valeur}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                    </p:columns>
+
+                </p:dataTable>
+
+                <p:separator/>
+
+                <center>
+                    <p:commandButton style="float: right; color: red;" icon="ui-icon-close" value="#{langues.Cancel}" onclick="PF('MedicamentDetailDialog').hide()"/>
+                </center>
+
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

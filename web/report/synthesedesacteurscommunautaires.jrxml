@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="synthesedesacteurscommunautaires" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="3" bottomMargin="3" whenResourceMissingType="Empty" uuid="b4424986-db34-411c-bd4d-85e8b5625eb3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="idregion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  public.structurecommunautaire.idstructurecommunautaire,
+  public.structurecommunautaire.effectif,
+  public.structurecommunautaire.nom_fr AS struccom,
+  public.typestructurecommunautaire.idtypestructurecommunautaire,
+  public.typestructurecommunautaire.nom_fr AS typ,
+  public.etatfonctstructcom.idetatfonctstructcom,
+  public.etatfonctstructcom.nom_fr AS etats,
+  public.commentaire_region.commentaire,
+  public.region.nom_fr AS districts
+FROM
+  public.structurecommunautaire
+  INNER JOIN public.typestructurecommunautaire ON (public.structurecommunautaire.idtypestructurecommunautaire = public.typestructurecommunautaire.idtypestructurecommunautaire)
+  INNER JOIN public.etatfonctstructcom ON (public.structurecommunautaire.idetatfonctstructcom = public.etatfonctstructcom.idetatfonctstructcom)
+  INNER JOIN public.region ON (public.structurecommunautaire.idregion = public.region.idregion)
+  INNER JOIN public.commentaire_region ON (public.region.idregion = public.commentaire_region.idregion)
+WHERE
+  public.region.idregion = $P{idregion} AND
+  public.commentaire_region.numerotab = 9
+ORDER BY
+  public.structurecommunautaire.nom_fr]]>
+	</queryString>
+	<field name="idstructurecommunautaire" class="java.lang.Integer"/>
+	<field name="effectif" class="java.lang.Integer"/>
+	<field name="struccom" class="java.lang.String"/>
+	<field name="idtypestructurecommunautaire" class="java.lang.Integer"/>
+	<field name="typ" class="java.lang.String"/>
+	<field name="idetatfonctstructcom" class="java.lang.Integer"/>
+	<field name="etats" class="java.lang.String"/>
+	<field name="commentaire" class="java.lang.String"/>
+	<field name="districts" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="27" y="0" width="775" height="19" forecolor="#0000FF" uuid="7f0c4b1e-9def-4ff3-9ac0-7adc49d22feb"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tableau 10-2: Synthèse des Structures Communautaires du niveau regional]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="146" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="27" y="100" width="733" height="46" uuid="2853bd9a-117a-484b-9bc6-548d8d015cde"/>
+				<box topPadding="5" leftPadding="4" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{commentaire}]]></textFieldExpression>
+			</textField>
+			<crosstab>
+				<reportElement x="0" y="0" width="802" height="100" uuid="10e5f550-4ae8-4a56-bf87-2890174a787f"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="186" height="49" backcolor="#FFFFCC" uuid="a526a51f-2cc3-4348-99a4-a4af8fbeda0a"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="13" isBold="true"/>
+							</textElement>
+							<text><![CDATA[REGIONS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="186" y="0" width="257" height="49" backcolor="#FFFFCC" uuid="5aae79db-35d8-4bbb-a881-ad32026a5b34"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="13" isBold="true"/>
+							</textElement>
+							<text><![CDATA[NOM DE LA STRUCTURE COMMUNAUTAIRE]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="443" y="0" width="156" height="49" backcolor="#FFFFCC" uuid="2da8a4a3-2ec3-46f3-b94e-ccb5400f1f02"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="13" isBold="true"/>
+							</textElement>
+							<text><![CDATA[NIVEAU DE FONCTIONNALITE DE L'ORGANISATION]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="599" y="0" width="118" height="49" backcolor="#FFFFCC" uuid="6ee7d1ed-529c-4ef8-bed6-cada8ea8a583"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Times New Roman" size="13" isBold="true"/>
+							</textElement>
+							<text><![CDATA[EFFECTIF]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="districts" width="186">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{districts}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Crosstab Data Text" stretchType="RelativeToBandHeight" x="0" y="0" width="186" height="49" uuid="1b859dab-cd7b-4c1c-9cb1-f310c1ffaa06"/>
+								<box leftPadding="4">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="14" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{districts}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="group1" width="257">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{struccom}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="257" height="49" uuid="6d0d381c-0fc5-4099-8615-7fa70dedb8a0"/>
+								<box leftPadding="4">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{group1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="group2" width="156">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{etats}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="156" height="49" uuid="dfde5248-9428-43bd-a07f-0f263c7d82ba"/>
+								<box leftPadding="4">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{group2}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="group3" width="118">
+					<bucket class="java.lang.Double">
+						<bucketExpression><![CDATA[$F{effectif}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField pattern="#,##0">
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="118" height="49" uuid="128c4537-0630-4e97-a0eb-d65bc9724a2b"/>
+								<box leftPadding="4">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{group3}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="idstructurecommunautaire" height="49">
+					<bucket class="java.lang.Integer">
+						<bucketExpression><![CDATA[$F{idstructurecommunautaire}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<box>
+								<leftPen lineWidth="0.5"/>
+							</box>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="idstructurecommunautaireMeasure" class="java.lang.Integer" calculation="Count">
+					<measureExpression><![CDATA[$F{idstructurecommunautaire}]]></measureExpression>
+				</measure>
+				<crosstabCell width="1" height="49">
+					<cellContents>
+						<box>
+							<pen lineColor="#FFFFFF"/>
+							<topPen lineColor="#FFFFFF"/>
+							<leftPen lineColor="#FFFFFF"/>
+							<bottomPen lineColor="#FFFFFF"/>
+							<rightPen lineColor="#FFFFFF"/>
+						</box>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="districts">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="e81a2653-3ff0-4271-86e0-86f819448637"/>
+							<textFieldExpression><![CDATA[$V{idstructurecommunautaireMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="idstructurecommunautaire">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="860bb557-c625-4efb-b049-e8edef2a127a"/>
+							<textFieldExpression><![CDATA[$V{idstructurecommunautaireMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="districts" columnTotalGroup="idstructurecommunautaire">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="27ff1b25-261e-48ab-ac0a-21b4d640f38a"/>
+							<textFieldExpression><![CDATA[$V{idstructurecommunautaireMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group1">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group1" columnTotalGroup="idstructurecommunautaire">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group2">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group2" columnTotalGroup="idstructurecommunautaire">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group3">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group3" columnTotalGroup="idstructurecommunautaire">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

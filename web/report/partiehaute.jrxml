@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="partiehaute" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="22b18984-92f8-4047-825e-03c1daa22832">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idregion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  public.partiehaute_region.idregion,
+  public.partiehaute_region.introduction,
+  public.partiehaute_region.presentationgenerale,
+  public.partiehaute_region.situationgeographique,
+  public.partiehaute_region.situationeconomique,
+  public.partiehaute_region.carte,
+  public.partiehaute_region.donnee_admin,
+  public.partiehaute_region.donnee_socio_cult,
+  public.partiehaute_region.donnee_demographique,
+  public.region.idregion
+FROM
+  public.region
+  INNER JOIN public.partiehaute_region ON (public.region.idregion = public.partiehaute_region.idregion)
+WHERE
+  public.region.idregion = $P{idregion}]]>
+	</queryString>
+	<field name="idregion" class="java.lang.Integer"/>
+	<field name="introduction" class="java.lang.String"/>
+	<field name="presentationgenerale" class="java.lang.String"/>
+	<field name="situationgeographique" class="java.lang.String"/>
+	<field name="situationeconomique" class="java.lang.String"/>
+	<field name="carte" class="java.lang.String"/>
+	<field name="donnee_admin" class="java.lang.String"/>
+	<field name="donnee_socio_cult" class="java.lang.String"/>
+	<field name="donnee_demographique" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="23" y="0" width="705" height="22" uuid="85ddbe69-80c1-4dc9-8f17-21390713a011"/>
+				<textElement>
+					<font fontName="Times New Roman" size="18" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[INTRODUCTION]]></text>
+			</staticText>
+			<line>
+				<reportElement x="23" y="22" width="689" height="1" uuid="2462b777-8bbe-494e-96d6-15d135ae2bef"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="52" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="23" y="11" width="689" height="41" uuid="7fbfc9ef-4042-416d-8039-53661eff7c3c"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{introduction}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:messages id="growl" closable="true" />
+
+    <h:form id="PartiehauteListform">
+
+        <p:panel header="#{langues.partiehaute}">
+
+            <p:tabView>
+                <p:tab title="#{langues.tauxalpha}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px" rows="27"  id="intro" value="#{donneeeconomiqueController.donneeSociauxEco.tauxAlphabetisation}" />
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="#{langues.typehabitat}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px; text-justify : auto; font-family:arial, sans-serif; font-size:90%"  rows="27" id="prese" value="#{donneeeconomiqueController.donneeSociauxEco.typeHabitat}"/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="#{langues.accescommodite}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px; text-justify : auto; font-family:arial, sans-serif; font-size:90%"  rows="27" id="pres" value="#{donneeeconomiqueController.donneeSociauxEco.accesCommodites}"/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="#{langues.hygene}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px; text-justify : auto; font-family:arial, sans-serif; font-size:90%"  rows="27" id="pre" value="#{donneeeconomiqueController.donneeSociauxEco.hygiene}"/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="#{langues.activiteeconomique}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px" rows="27" id="sitsoceco" value="#{donneeeconomiqueController.donneeSociauxEco.activiteEco}"/>
+                    </h:panelGrid>
+                </p:tab>
+
+                <p:tab title="#{langues.revenuparhabitant}">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:inputTextarea style=" width: 1300px" rows="27" id="sitsocico" value="#{donneeeconomiqueController.donneeSociauxEco.revenuParHabitant}"/>
+                    </h:panelGrid>
+                </p:tab>
+                
+
+            </p:tabView>
+        </p:panel>
+        <center>
+
+            <p:commandButton actionListener="#{donneeeconomiqueController.saveDonneeSociauxEco()}" value="#{langues.Save}" update=":PartiehauteListform" > 
+                <p:confirm header="#{langues.ConfirmationHeader}" message="#{langues.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </center>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+</ui:composition>

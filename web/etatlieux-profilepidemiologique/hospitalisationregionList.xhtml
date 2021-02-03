@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:form id="MedicamentListForm">
+
+        <p:growl id="growl" showDetail="true"/>
+
+        <br/>
+
+        <center>
+            <h2>II- #{langues.ListHospitalisationdistrictTitle}</h2>
+        </center>
+
+
+
+        <p:contextMenu id="ExercieDataTableContextMenu" for="datalist">  
+            <p:menuitem value="#{langues.Edit}" onclick="document.getElementById('MedicamentListForm:editButton').click();" icon="ui-icon-pencil"/>            
+            <p:separator/>                 
+        </p:contextMenu>
+
+
+        <p:dataTable id="datalist"
+                     value="#{hospitalisationregionController.hospitalisations}"
+                     var="item"
+                     rowKey="#{item.idhospitalisation}"
+                     paginator="true"
+                     rows="80"
+                     style="width: 96%;margin-left: 2%"
+                     rowIndexVar="index"
+                     rowsPerPageTemplate="10,20,30,40,50,60,70,80"
+                     selectionMode="single"
+                     draggableColumns="true"
+                     resizableColumns="true"
+                     scrollHeight="100"
+                     selection="#{hospitalisationregionController.hospitalisation}"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+            <p:ajax event="rowSelect" listener="#{hospitalisationregionController.activeButton()}" update="MedicamentListForm:editButton" />
+            <p:ajax event="rowDblselect" onsuccess="document.getElementById('MedicamentListForm:viewButton').click();" listener="#{hospitalisationregionController.activeButton()}"/>
+
+            <p:columnGroup type="header">
+                <p:row>
+                    <p:column class="hardBreak" rowspan="2" colspan="2" headerText="#{langues.hospitalisation}" />
+                    <p:column class="hardBreak" colspan="#{hospitalisationregionController.rubriquehospitalisations.size()}" headerText="#{langues.rubriquehospitalisation}" />
+                    <p:column class="hardBreak" rowspan="2" colspan="1" headerText="Action" />
+                </p:row>
+                <p:row>
+                    <ui:repeat value="#{hospitalisationregionController.rubriquehospitalisations}" var="medicament">
+                        <p:column class="hardBreak" headerText="#{medicament.nomFr}"/>
+                    </ui:repeat>
+                </p:row>
+            </p:columnGroup>
+
+            <p:column colspan="2" style= "height: 30px" >
+                <h:outputText class="hardBreak" value="#{item.code} - #{item.nomFr}" />
+            </p:column>
+
+            <p:columns value="#{hospitalisationregionController.rubriquehospitalisations}" var="var">
+                <h:outputText class="hardBreak" value="#{hospitalisationregionController.findRubriquehospitalisation(item, var)}"/>
+            </p:columns>
+
+            <p:column colspan="1">
+                <p:commandButton value="Détail">
+                    <p:ajax update=":MedicamentDetailForm,:MedicamentDetailDlg" listener="#{hospitalisationregionController.initHospitalisarion(item)}"/>
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+
+        <p:separator style="width: 96%;margin-left: 2% "/>
+
+        <center>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="commentaire" value="#{langues.commentairetab}:"/>
+                <p:inputTextarea  id="commentaire" disabled="false" style="color: red" value="#{hospitalisationregionController.commentaireRegion.commentaire}" rows="8" cols="150">
+                    <p:ajax event="keyup"/>
+                </p:inputTextarea>
+            </p:panelGrid>
+        </center>
+
+        <p:separator style="width: 90%;margin-left: 5%"/>
+
+        <center>
+            <p:commandButton disabled="#{hospitalisationregionController.detail}" id="editButton" update=":MedicamentCreateForm,growl,:MedicamentCreateForm:commentaire" icon="ui-icon-pencil" value="Saisir les données de la region" actionListener="#{hospitalisationregionController.uptadeTable()}" oncomplete="PF('MedicamentCreateDialog').show()"/>
+            <p:commandButton  id="consolidButton" update="datalist,growl,:MedicamentCreateForm:commentaire" icon="ui-icon-pencil" value="Consolider les données du district" actionListener="#{hospitalisationregionController.consolidate()}"/>
+            <p:commandButton  id="commentButton" update="growl" icon="ui-icon-pencil" value="#{langues.valider_commentaire}" actionListener="#{hospitalisationregionController.validComment()}"/>
+        </center>
+                
+    </h:form>
+</ui:composition>
